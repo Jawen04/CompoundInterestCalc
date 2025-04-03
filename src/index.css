@@ -5,6 +5,7 @@
 
 
 :root {
+  --primary-border-radius: 20px;
   --primary-color: #4f920f;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -24,8 +25,12 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: #f9f9f9;
 }
 
+h2 {
+  color: #f9f9f9;
+}
 
 
 .header {
@@ -53,6 +58,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 
@@ -60,8 +66,8 @@ h1 {
   display: flex;
   background-color: var(--primary-color);
   min-width: 70%;
-  min-height: 700px;
-  border-radius: 20px;
+  min-height: auto;
+  border-radius: var(--primary-border-radius);
   padding: 40px;
 }
 
@@ -75,20 +81,44 @@ h1 {
 
 
 .inputBox {
-  justify-content: center;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding-top: 10px;
-  width: 90%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 100%;
 }
 
 .inputField {
-  background-color: #f9f9f9;
-  border-radius: 20px;
-  padding-left: 10px;
-  height: 50px;
-  width: 100%;
-  border-color: black;
+  
+  width: 70%;
 }
+
+.sliderTitle {
+  margin-right: auto;             /* Push this item to the left */
+  color: white;
+  text-align: center;
+}
+
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 70%;
+  background-color: var(--primary-color);
+  border-radius: var(--primary-border-radius);
+}
+
+.chart {
+  border-radius: var(--primary-border-radius);
+  background-color: white;
+  width: 95%;
+  padding: 10px;
+}
+
 
 
 
