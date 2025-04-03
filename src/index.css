@@ -1,7 +1,11 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 :root {
-  --primary-color: #85ee23;
+  --primary-color: #4f920f;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -28,12 +32,17 @@ h1 {
   position: sticky;
   top: 0;
   justify-content: center;
+  align-items: center;
   display: flex;
-  height: 100px;
+  height: 150px;
   width: 100%;
   z-index: 1000;
   background-color: var(--primary-color);
+  flex-direction: column;
+  text-align: center;
 }
+
+
 
 .scrollableContent {
   min-height: 200vh;
@@ -56,12 +65,39 @@ h1 {
   padding: 40px;
 }
 
+.valuesBox {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+
+.inputBox {
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  width: 90%;
+}
+
+.inputField {
+  background-color: #f9f9f9;
+  border-radius: 20px;
+  padding-left: 10px;
+  height: 50px;
+  width: 100%;
+  border-color: black;
+}
 
 
 
 
 
-
+.inputField:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(79, 144, 15, 0.5);
+}
 
 
 

@@ -16,8 +16,8 @@ function Header() {
   return (
     <div className='header'>
       <div className='headerContent'>
-        <h1>HELLO</h1>
-        <p>WORLD</p>
+        <h1>Compound Interest Calculator</h1>
+        <h2>By Jacob</h2>
       </div>
     </div>
   )
@@ -38,9 +38,34 @@ function InputValuesContainer() {
   return (
     <div className='inputValuesContainer'>
       <div className='valuesBox'>
-        <h2>HELLO</h2>
-        <p>WORLD</p>
+        <InputBox />
+        <InputBox />
+        <InputBox />
+        <InputBox />
       </div>
+    </div>
+  )
+}
+
+function InputBox() {
+  const [text, setText] = useState("");
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      console.log(text); // Print the text when Enter is pressed
+    }
+  };
+  return (
+    <div className='inputBox'>
+      <label className='inputLabel'></label>
+      <input 
+        className='inputField'
+        type="text" 
+        value={text} 
+        onChange={(e) => setText(e.target.value)} 
+        placeholder="Type something..."
+        onKeyDown={handleKeyDown}
+        
+      />
     </div>
   )
 }
