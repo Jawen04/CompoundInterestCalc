@@ -124,8 +124,7 @@ function Header() {
   return (
     <div className='header'>
       <div className='headerContent'>
-        <h1>Compound Interest Calculator</h1>
-        <h2>By Jacob</h2>
+        <h1 className='title'>Compound Interest Calculator</h1>
       </div>
     </div>
   );
@@ -147,6 +146,7 @@ function Content({ rentPerYear, setRentPerYear, startCapital, setStartCapital, s
         />
         <button className="update-button" onClick={handleUpdateChart}>Calculate Growth</button>
         <Chart chartData={chartData} />
+        <ResultContainer />
       </div>
     </div>
   );
@@ -199,7 +199,7 @@ function InputValuesContainer({ rentPerYear, setRentPerYear, startCapital, setSt
 function SliderTitle({ SliderTitle }) {
   return (
     <div className='sliderTitle'>
-      <h2>{SliderTitle}</h2>
+      <h2 class="background-color white">{SliderTitle}</h2>
     </div>
   );
 }
@@ -239,6 +239,33 @@ function Chart({ chartData }) {
    
     </div>
   );
+}
+
+
+
+function ResultContainer() {
+  return (
+    <div className='resultContainer'>
+      <ResultBox />
+    </div>
+  )
+}
+
+function ResultBox() {
+  return (
+    
+    <div className='resultBox'>
+      
+          <div className='resultText'>30 568 USD</div>
+          <div className='resultText'>67 778 USD</div>
+          <div className='resultText'>5 900 USD</div>
+          <div className='resultText'>987 226 USD</div>
+          <div className='resultText'>4 087 USD</div>
+           
+    </div>
+      
+  
+  )
 }
 
 export default App;
