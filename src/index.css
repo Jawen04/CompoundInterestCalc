@@ -31,6 +31,7 @@ body {
   font-weight: bold;
   color: white;
   text-align: center;
+  flex: 1;
   margin-top: 20px;
 }
 .header {
@@ -49,9 +50,8 @@ body {
 
 .headerContent {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  flex-direction: column;
   width: 100%;
 }
 
@@ -174,9 +174,52 @@ body {
   box-shadow: 0 0 5px rgba(79, 144, 15, 0.5);
 }
 
+.update-button {
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 70%;
+  background-color: var(--primary-color);
+  border-radius: var(--primary-border-radius);
+  cursor: pointer;
+  color: white;
+  
+}
 
 
 
+
+.dropdown-toggle {
+  background-color: gray ;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.dropdown-menu {
+  height: 300vh;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #213547;
+  flex-direction: column;
+}
+
+.closeBtn {
+  width: 50px;
+  height: 50px;
+  background-color: #747bff;
+  margin-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  
+}
+
+.upper {
+  margin-left: auto;
+}
 
 
 
