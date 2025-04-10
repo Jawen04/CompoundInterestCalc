@@ -4,6 +4,10 @@ import ApexCharts from 'react-apexcharts';
 import { CalculatorContext, CalculatorProvider } from './CalculatorContext';
 import DropDown from './components/Dropdown';
 
+//const [coolValue, setCoolValue] = useState(0);
+const calculatorValues = {}
+calculatorValues.rentPerYear = 6
+
 function App() {  
   return (
     <CalculatorProvider>
@@ -159,13 +163,15 @@ function ResultBox() {
   return (
     
     <div className='resultBox'>
-      
-          <div className='resultText'>30 568 USD</div>
-          <div className='resultText'>67 778 USD</div>
-          <div className='resultText'>5 900 USD</div>
-          <div className='resultText'>987 226 USD</div>
-          <div className='resultText'>4 087 USD</div>
-           
+      <div className='resultText'>{calculatorValues.rentPerYear}</div>
+      <div className='resultText'>67 778 USD</div>
+      <div className='resultText'>5 900 USD</div>
+      <div className='resultText'>987 226 USD</div>
+      <div className='resultText'>4 087 USD</div>
+      <div 
+      className='testBtn'
+      onClick={() => {calculatorValues.rentPerYear = 999; console.log(calculatorValues.rentPerYear)}} 
+      > TEST</div>
     </div>
       
   

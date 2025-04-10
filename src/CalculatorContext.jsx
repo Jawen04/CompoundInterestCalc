@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+import calculateCompoundInterest from './util/calculate';
 
 export const CalculatorContext = createContext();
 
@@ -8,7 +9,10 @@ export const CalculatorProvider = ({ children }) => {
   const [savingPerMonth, setSavingPerMonth] = useState(100);
   const [savingSpan, setSavingSpan] = useState(10);
   const [chartData, setChartData] = useState({ 
-    series: [], 
+    series: [{
+      name: 'Investment Value',
+      data: [] // Initialize with empty array
+    }],
     options: {
       chart: {
         type: 'area',
@@ -42,7 +46,7 @@ export const CalculatorProvider = ({ children }) => {
       yaxis: {
         labels: {
           formatter: function (val) {
-            return (val).toFixed(0);
+            return (val).toFixed(2);
           },
         },
         title: {
@@ -56,48 +60,42 @@ export const CalculatorProvider = ({ children }) => {
         shared: false,
         y: {
           formatter: function (val) {
-            return (val*1000).toFixed(0);
+            return (val).toFixed(0);
           },
         },
       },
     } 
   });
 
-  const handleUpdateChart = () => {
-    const currentYear = new Date().getFullYear();
-    const dates = [];
-    const values = [];
-    let accumulated = startCapital;
-    
-    for (let i = 0; i <= savingSpan; i++) {
-      const date = new Date(currentYear + i, 0, 1).getTime();
-      dates.push(date);
-      
-      if (i > 0) {
-        accumulated = (accumulated + (savingPerMonth * 12)) * (1 + rentPerYear / 100);
-      }
-      
-      values.push({
-        x: date,
-        y: accumulated
-      });
-    }
+  // In CalculatorContext.js
+const handleUpdateChart = () => {
+  const currentYear = new Date().getFullYear();
+  const dataPoints = [];
+  
+  for (let i = 0; i <= savingSpan; i++) {
+    const value = calculateCompoundInterest(startCapital, savingPerMonth, rentPerYear, i);
+    dataPoints.push({
+      x: new Date(currentYear + i, 0, 1).getTime(),
+      y: value.total
+    });
+    console.log(`Year: ${i}, Value: ${value}`);
+  }
 
-    setChartData(prev => ({
-      ...prev,
-      series: [{
-        name: 'Investment Value',
-        data: values,
-      }],
-      options: {
-        ...prev.options,
-        title: {
-          text: `Investment Growth (${rentPerYear}% annual return)`,
-          align: 'left',
-        },
+  setChartData(prev => ({
+    ...prev,
+    series: [{
+      name: 'Investment Value',
+      data: dataPoints
+    }],
+    options: {
+      ...prev.options,
+      title: {
+        text: `Investment Growth (${rentPerYear}% annual return)`,
+        align: 'left'
       }
-    }));
-  };
+    }
+  }));
+};
 
   return (
     <CalculatorContext.Provider
@@ -118,3 +116,13 @@ export const CalculatorProvider = ({ children }) => {
     </CalculatorContext.Provider>
   );
 };
+
+
+
+
+  
+
+  
+
+
+export default CalculatorProvider;
