@@ -3,10 +3,10 @@ import './App.css';
 import ApexCharts from 'react-apexcharts';
 import { CalculatorContext, CalculatorProvider } from './CalculatorContext';
 import DropDown from './components/Dropdown';
+import calculateCompoundInterest from './util/calculate';
 
 //const [coolValue, setCoolValue] = useState(0);
-const calculatorValues = {}
-calculatorValues.rentPerYear = 6
+
 
 function App() {  
   return (
@@ -113,6 +113,7 @@ function SliderTitle({ SliderTitle }) {
 }
 
 function InputBox({ value, setValue, maxValue, suffix, step }) {
+
   const handleChange = (e) => {
     setValue(parseFloat(e.target.value));
   };
@@ -160,18 +161,79 @@ function ResultContainer() {
 }
 
 function ResultBox() {
+
+  const {
+    rentPerYear,
+    setRentPerYear,
+    startCapital,
+    setStartCapital,
+    savingPerMonth,
+    setSavingPerMonth,
+    savingSpan,
+    setSavingSpan,
+  } = useContext(CalculatorContext)
+
+  // calculateCompoundInterest(startCapital, savingPerMonth, rentPerYear, i);
+  const calculator = calculateCompoundInterest(startCapital, savingPerMonth, rentPerYear, savingSpan);
+
+  const titleFontSize = '40px';
+  const valueFontSize = '70px';
   return (
     
     <div className='resultBox'>
-      <div className='resultText'>{calculatorValues.rentPerYear}</div>
-      <div className='resultText'>67 778 USD</div>
-      <div className='resultText'>5 900 USD</div>
-      <div className='resultText'>987 226 USD</div>
-      <div className='resultText'>4 087 USD</div>
-      <div 
-      className='testBtn'
-      onClick={() => {calculatorValues.rentPerYear = 999; console.log(calculatorValues.rentPerYear)}} 
-      > TEST</div>
+      <div className='resultText'>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          textAlign: 'left',
+          gap: '8px' // or '0.5rem', '10px', etc.
+        }}>
+        <h3 style = {{fontSize:titleFontSize, width:'400px'}}>Your total value is:</h3>
+        <h1 style = {{fontSize:valueFontSize, color:'#5af542'}}>{calculator.total.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, " ")} </h1>
+        </div>
+      </div>
+      <div className='resultText'>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          textAlign: 'left',
+          gap: '8px' // or '0.5rem', '10px', etc.
+        }}>
+        <h3 style = {{fontSize:titleFontSize, width:'400px'}}>Your total compound interest was:</h3>
+        <h1 style = {{fontSize:valueFontSize, color:'#f5429c'}}>{calculator.growth.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</h1>
+        </div>
+      </div>
+      <div className='resultText'>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          textAlign: 'left',
+          gap: '8px' // or '0.5rem', '10px', etc.
+        }}>
+        <h3 style = {{fontSize:titleFontSize, width:'400px'}}>Your total value is:</h3>
+        <h1 style = {{fontSize:valueFontSize, color:'#4260f5'}}>{startCapital.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</h1>
+        </div>
+      </div>
+      <div className='resultText'>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          textAlign: 'left',
+          gap: '8px' // or '0.5rem', '10px', etc.
+        }}>
+        <h3 style = {{fontSize:titleFontSize, width:'400px'}}>Your total value is:</h3>
+        <h1 style = {{fontSize:valueFontSize, color:'#f5429c'}}>{calculator.accumulatedSavings.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</h1>
+        </div>
+      </div>
+
+
+
+      
+
     </div>
       
   

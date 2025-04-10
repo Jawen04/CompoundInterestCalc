@@ -1,6 +1,10 @@
 import { createContext, useState } from 'react';
 import calculateCompoundInterest from './util/calculate';
 
+
+
+let calculatorResult = []
+
 export const CalculatorContext = createContext();
 
 export const CalculatorProvider = ({ children }) => {
@@ -8,6 +12,7 @@ export const CalculatorProvider = ({ children }) => {
   const [startCapital, setStartCapital] = useState(1000);
   const [savingPerMonth, setSavingPerMonth] = useState(100);
   const [savingSpan, setSavingSpan] = useState(10);
+  const [currency, setCurrency] = useState('SEK');
   const [chartData, setChartData] = useState({ 
     series: [{
       name: 'Investment Value',
@@ -81,6 +86,7 @@ const handleUpdateChart = () => {
     console.log(`Year: ${i}, Value: ${value}`);
   }
 
+ 
   setChartData(prev => ({
     ...prev,
     series: [{
@@ -97,6 +103,11 @@ const handleUpdateChart = () => {
   }));
 };
 
+
+
+  
+  
+
   return (
     <CalculatorContext.Provider
       value={{
@@ -110,14 +121,13 @@ const handleUpdateChart = () => {
         setSavingSpan,
         handleUpdateChart,
         chartData,
+        currency
       }}
     >
       {children}
     </CalculatorContext.Provider>
   );
 };
-
-
 
 
   
