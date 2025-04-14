@@ -1,7 +1,9 @@
 @import "tailwindcss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+@import "./smallDropDown.css";  
+
+
+
 
 
 :root {
@@ -103,7 +105,22 @@ body {
 
 .inputField {
   
-  width: var(--component-width);
+  width: 70%;
+}
+
+.inputTextField {
+  width: 50%;  
+  border-top-left-radius: var(--primary-border-radius);
+  border-bottom-left-radius: var(--primary-border-radius);
+  border-width: 1px;
+  padding-left: 5px;
+}
+
+
+
+.inputField:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(79, 144, 15, 0.5);
 }
 
 .sliderTitle {
@@ -162,17 +179,9 @@ body {
   font-size: 30px;
   font-weight: bold;
   color: white;
-  
-  
-
 }
 
 
-
-.inputField:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 5px rgba(79, 144, 15, 0.5);
-}
 
 .update-button {
   margin: 10px;
@@ -191,21 +200,7 @@ body {
 
 
 
-.dropdown-toggle {
-  background-color: gray ;
-  cursor: pointer;
-  margin-left: 20px;
-}
 
-.dropdown-menu {
-  height: 300vh;
-  width: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #213547;
-  flex-direction: column;
-}
 
 .closeBtn {
   width: 50px;

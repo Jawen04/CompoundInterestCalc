@@ -113,10 +113,35 @@ function SliderTitle({ SliderTitle }) {
 }
 
 function InputBox({ value, setValue, maxValue, suffix, step }) {
+  const [textInput, setTextInput] = useState(value);
+  const [toggleDropDown, setToggleDropDown] = useState(false)
 
   const handleChange = (e) => {
     setValue(parseFloat(e.target.value));
+    setTextInput(parseFloat(e.target.value));
   };
+
+  const handleTextInput = (e) => {
+    const inputValue = e.target.value.replace(/\s+/g, ''); // Remove spaces
+    if (inputValue === "") {
+      setTextInput(0); // Set to 0 if input is empty
+    } else if (/^[0-9]*\.?[0-9]*$/.test(inputValue)) { // Allow decimal numbers
+      setTextInput(inputValue); // Update state with valid number input
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      const inputValue = parseFloat(e.target.value);
+      if (!isNaN(inputValue)) {
+        setValue(inputValue);
+      }
+    }
+  };
+
+  const handleDropDown = (e) => {
+    setToggleDropDown(!toggleDropDown)
+  }
 
   return (
     <div className='inputBox'>
@@ -129,10 +154,34 @@ function InputBox({ value, setValue, maxValue, suffix, step }) {
         value={value} 
         onChange={handleChange}
       />
-      <h2>{value} {suffix}</h2>
+      <div style={{width:'30%', paddingLeft:'20px'}}>
+        <input
+          className='inputTextField'
+          placeholder='Enter value'
+          value={textInput}
+          onChange={handleTextInput}
+          onKeyDown={handleKeyDown} 
+        />
+        <button
+          className='dropdown-toggle'
+          onClick={handleDropDown}
+        >
+          {suffix}
+        </button>
+        {toggleDropDown && (
+        <div className="dropdown-menu">
+          <a href="#">Option 1</a>
+          <a href="#">Option 2</a>
+          <a href="#">Option 3</a>
+        </div>
+      )}
+      </div>
+      
     </div>
   );
 }
+
+
 
 function Chart({ chartData }) {
   return (
