@@ -20,9 +20,20 @@
     background-color: #45a049;
   }
   
+  .dropdown-item {
+    width: 100%;
+    border-radius: var(--primary-border-radius);    
+  }
+
+  .dropdown-item:hover {
+    background-color: #214b23;
+
+  }
   /* The dropdown menu is hidden by default */
   .dropdown-menu {
+    display: flex;
     position: absolute;
+    margin-right: auto;
     background-color: #f9f9f9;
     height: auto;
     width: 10%;
@@ -30,8 +41,7 @@
     background-color: #4CAF50;
     z-index: 10;
     border-radius: var(--primary-border-radius);
-    padding: 5px;
-
+    flex-direction: column;
    
   }
   

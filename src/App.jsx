@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useRef, useEffect } from 'react';
 import './App.css';
 import ApexCharts from 'react-apexcharts';
 import { CalculatorContext, CalculatorProvider } from './CalculatorContext';
@@ -59,6 +59,8 @@ function InputValuesContainer() {
     setSavingPerMonth,
     savingSpan,
     setSavingSpan,
+    setCurrency,
+    currency,
   } = useContext(CalculatorContext)
 
   return (
@@ -73,22 +75,26 @@ function InputValuesContainer() {
           step={0.1} 
         />
 
-        <SliderTitle SliderTitle={"Initial investment (USD)"} />
+        <SliderTitle SliderTitle={"Initial investment " + currency} />
         <InputBox 
           value={startCapital} 
           setValue={setStartCapital} 
           maxValue={100000} 
-          suffix={"USD"} 
-          step={10} 
+          suffix={currency} 
+          step={10}
+          setCurrency={setCurrency} 
+          currency={currency}
         />
 
-        <SliderTitle SliderTitle={"Monthly contribution (USD)"} />
+        <SliderTitle SliderTitle={"Monthly contribution (" + currency + ")"} />
         <InputBox 
           value={savingPerMonth} 
           setValue={setSavingPerMonth} 
           maxValue={1000} 
-          suffix={"USD/month"} 
-          step={10} 
+          suffix={currency + "/month"} 
+          step={10}
+          setCurrency={setCurrency} 
+          currency={currency}
         />
 
         <SliderTitle SliderTitle={"Investment period (years)"} />
@@ -98,6 +104,8 @@ function InputValuesContainer() {
           maxValue={60} 
           suffix={"years"} 
           step={1} 
+          setCurrency={setCurrency} 
+          currency={currency}
         />
       </div>
     </div>
@@ -112,9 +120,25 @@ function SliderTitle({ SliderTitle }) {
   );
 }
 
-function InputBox({ value, setValue, maxValue, suffix, step }) {
+function InputBox({ value, setValue, maxValue, suffix, step, currency, setCurrency }) {
   const [textInput, setTextInput] = useState(value);
   const [toggleDropDown, setToggleDropDown] = useState(false)
+  const dropdownRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setToggleDropDown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleChange = (e) => {
     setValue(parseFloat(e.target.value));
@@ -139,9 +163,13 @@ function InputBox({ value, setValue, maxValue, suffix, step }) {
     }
   };
 
-  const handleDropDown = (e) => {
+  const handleDropDownChoice = (currencyCode) => {
     setToggleDropDown(!toggleDropDown)
+    setCurrency(currencyCode)
+    console.log(currency)
   }
+
+  
 
   return (
     <div className='inputBox'>
@@ -154,7 +182,7 @@ function InputBox({ value, setValue, maxValue, suffix, step }) {
         value={value} 
         onChange={handleChange}
       />
-      <div style={{width:'30%', paddingLeft:'20px'}}>
+      <div style={{width:'30%', paddingLeft:'20px'}} ref={dropdownRef}>
         <input
           className='inputTextField'
           placeholder='Enter value'
@@ -164,15 +192,17 @@ function InputBox({ value, setValue, maxValue, suffix, step }) {
         />
         <button
           className='dropdown-toggle'
-          onClick={handleDropDown}
+          onClick={() => setToggleDropDown(!toggleDropDown)}
         >
           {suffix}
+
+        
         </button>
-        {toggleDropDown && (
+        {toggleDropDown && suffix === currency && (
         <div className="dropdown-menu">
-          <a href="#">Option 1</a>
-          <a href="#">Option 2</a>
-          <a href="#">Option 3</a>
+          <button className="dropdown-item" onClick={() => handleDropDownChoice("USD")}>USD</button>
+          <button className="dropdown-item" onClick={() => handleDropDownChoice("SEK")}>SEK</button>
+          <button className="dropdown-item" onClick={() => handleDropDownChoice("NRG")}>NRG</button>
         </div>
       )}
       </div>

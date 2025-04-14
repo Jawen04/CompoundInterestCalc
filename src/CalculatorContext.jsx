@@ -55,7 +55,7 @@ export const CalculatorProvider = ({ children }) => {
           },
         },
         title: {
-          text: 'Amount (USD)',
+          text: "Amount",
         },
       },
       xaxis: {
@@ -121,6 +121,7 @@ const handleUpdateChart = () => {
         setSavingSpan,
         handleUpdateChart,
         chartData,
+        setCurrency,
         currency
       }}
     >
