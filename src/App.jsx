@@ -172,7 +172,7 @@ function InputBox({ value, setValue, maxValue, suffix, step, currency, setCurren
   
 
   return (
-    <div className='inputBox'>
+    <div className='inputContainer'>
       <input 
         className='inputField'
         type="range" 
@@ -182,7 +182,8 @@ function InputBox({ value, setValue, maxValue, suffix, step, currency, setCurren
         value={value} 
         onChange={handleChange}
       />
-      <div style={{width:'30%', paddingLeft:'20px'}} ref={dropdownRef}>
+      
+      <div className='text-and-drop'>
         <input
           className='inputTextField'
           placeholder='Enter value'
@@ -190,24 +191,24 @@ function InputBox({ value, setValue, maxValue, suffix, step, currency, setCurren
           onChange={handleTextInput}
           onKeyDown={handleKeyDown} 
         />
-        <button
-          className='dropdown-toggle'
-          onClick={() => setToggleDropDown(!toggleDropDown)}
-        >
-          {suffix}
 
-        
-        </button>
-        {toggleDropDown && suffix === currency && (
-        <div className="dropdown-menu">
-          <button className="dropdown-item" onClick={() => handleDropDownChoice("USD")}>USD</button>
-          <button className="dropdown-item" onClick={() => handleDropDownChoice("SEK")}>SEK</button>
-          <button className="dropdown-item" onClick={() => handleDropDownChoice("NRG")}>NRG</button>
+        <div ref={dropdownRef}>
+          <button
+            className='dropdown-toggle'
+            onClick={() => setToggleDropDown(!toggleDropDown)}
+          >{suffix}</button>
+          {toggleDropDown && suffix === currency && (
+            <div className="dropdown-menu">
+              <button className="dropdown-item" onClick={() => handleDropDownChoice("USD")}>USD</button>
+              <button className="dropdown-item" onClick={() => handleDropDownChoice("SEK")}>SEK</button>
+              <button className="dropdown-item" onClick={() => handleDropDownChoice("NRG")}>NRG</button>
+            </div>
+          )}
         </div>
-      )}
       </div>
-      
     </div>
+      
+    
   );
 }
 

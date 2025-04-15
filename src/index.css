@@ -91,16 +91,14 @@ body {
 
 
 
-.inputBox {
+.inputContainer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding-top: 20px;
   padding-bottom: 20px;
   width: 100%;
   background-color: white;
   padding: 5px;
-  border-radius: 20px;
+  border-radius: 30px;
 }
 
 .inputField {
@@ -109,11 +107,12 @@ body {
 }
 
 .inputTextField {
-  width: 50%;  
+    
   border-top-left-radius: var(--primary-border-radius);
   border-bottom-left-radius: var(--primary-border-radius);
   border-width: 1px;
   padding-left: 5px;
+  width: 100%;
 }
 
 

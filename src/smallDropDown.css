@@ -1,6 +1,13 @@
 /* Basic styling for the dropdown */
 
-  
+  .text-and-drop {
+    display: flex;
+    flex-direction: row; /* default, so technically optional */
+    align-items: center;  /* vertical alignment */
+    width: 30%;
+    padding-left: 30px;
+    
+  }
   .dropdown-toggle {
     font-size: 16px;
     cursor: pointer;
@@ -10,7 +17,7 @@
     border-radius: 4px;
     border-top-right-radius: var(--primary-border-radius);
     border-bottom-right-radius: var(--primary-border-radius);
-    width: 40%;
+    width: auto;
     padding-left: 10px;
     padding-right: 10px;
 
@@ -23,28 +30,32 @@
   .dropdown-item {
     width: 100%;
     border-radius: var(--primary-border-radius);    
+    padding-left: 10px;
+    padding-right: 10px;
+
   }
 
   .dropdown-item:hover {
     background-color: #214b23;
-
+    
   }
   /* The dropdown menu is hidden by default */
   .dropdown-menu {
-    display: flex;
     position: absolute;
-    margin-right: auto;
-    background-color: #f9f9f9;
-    height: auto;
-    width: 10%;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    background-color: #4CAF50;
-    z-index: 10;
-    border-radius: var(--primary-border-radius);
+    display: flex;
     flex-direction: column;
-   
-  }
+    background-color: #4CAF50;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    border-radius: var(--primary-border-radius);  
+    padding-left: 10px;
+    padding-right: 10px;
+    padding: 10px;
+  } 
   
+  
+  .inputBox {
+  }
   
   
   .dropdown-menu a:hover {
